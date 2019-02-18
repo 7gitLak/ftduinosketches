@@ -40,6 +40,16 @@ void oneStepRight() {
     oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::RIGHT, Ftduino::LEFT, true, false);
 }
 
+bool setMotor(uint8_t port, uint8_t mode)
+{
+    ftduino.motor_set(port, mode);
+    if((Ftduino::LEFT == mode) || (Ftduino::RIGHT == mode)) 
+    {
+        return true;
+    }
+    return false;
+}
+
 void oneStepBase(uint8_t ch1, uint8_t ch2, uint8_t mode1, uint8_t mode2, const bool low2high1, const bool low2high2) 
 {
   bool bInit1 = ftduino.input_get(ch1);
@@ -47,10 +57,8 @@ void oneStepBase(uint8_t ch1, uint8_t ch2, uint8_t mode1, uint8_t mode2, const b
   bool bCurrent1 = bInit1;
   bool bCurrent2 = bInit2;  
   
-  ftduino.motor_set(Ftduino::M1, mode1);
-  ftduino.motor_set(Ftduino::M2, mode2);
-  bool bRunning1 = true;
-  bool bRunning2 = true;
+  bool bRunning1 = setMotor(Ftduino::M1, mode1);
+  bool bRunning2 = setMotor(Ftduino::M2, mode2);
   
   digitalWrite ( LED_BUILTIN , HIGH ) ;
   
@@ -58,15 +66,13 @@ void oneStepBase(uint8_t ch1, uint8_t ch2, uint8_t mode1, uint8_t mode2, const b
   {   
     bCurrent1 = ftduino.input_get(ch1);
     if(isChange(blow2high1, bInit1, bCurrent1)) {
-      ftduino.motor_set(Ftduino::M1, Ftduino::BRAKE);      
-      bRunning1 = false;
+      bRunning1 = setMotor(Ftduino::M1, Ftduino::BRAKE);
     }
     bInit1 = bCurrent1;
     
     bCurrent2 = ftduino.input_get(ch2);
     if(isChange(blow2high2, bInit2, bCurrent2)) {
-      ftduino.motor_set(Ftduino::M2, Ftduino::BRAKE);      
-      bRunning2 = false;
+      bRunning2 = setMotor(Ftduino::M2, Ftduino::BRAKE);
     }
     bInit2 = bCurrent2;    
   }   
