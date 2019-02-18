@@ -34,6 +34,8 @@ void oneStepBack() {
 
 void oneStepLeft() {
     oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::LEFT, Ftduino::RIGHT, false, true);
+    oneStepBase(Ftduino::I3, Ftduino::I2, Ftduino::BRAKE, Ftduino::RIGHT, true, true);
+    oneStepBase(Ftduino::I1, Ftduino::I2, Ftduino::LEFT, Ftduino::BRAKE, false, true);
 }
 
 void oneStepRight() {
