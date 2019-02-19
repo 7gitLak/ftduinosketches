@@ -50,7 +50,7 @@ void turnLeft() {
     oneStepLeft();
 }
 
-void turnRigth() {
+void turnRight() {
     oneStepBack();
     oneStepRight();
     oneStepRight();
@@ -81,13 +81,13 @@ void oneStepBase(uint8_t ch1, uint8_t ch2, uint8_t mode1, uint8_t mode2, const b
   while (bRunning1 || bRunning2)
   {   
     bCurrent1 = ftduino.input_get(ch1);
-    if(isChange(blow2high1, bInit1, bCurrent1)) {
+    if(isChange(low2high1, bInit1, bCurrent1)) {
       bRunning1 = setMotor(Ftduino::M1, Ftduino::BRAKE);
     }
     bInit1 = bCurrent1;
     
     bCurrent2 = ftduino.input_get(ch2);
-    if(isChange(blow2high2, bInit2, bCurrent2)) {
+    if(isChange(low2high2, bInit2, bCurrent2)) {
       bRunning2 = setMotor(Ftduino::M2, Ftduino::BRAKE);
     }
     bInit2 = bCurrent2;    
