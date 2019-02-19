@@ -33,27 +33,29 @@ void oneStepBack() {
 }
 
 void oneStepLeft() {
-    oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::LEFT, Ftduino::RIGHT, false, true);
-    oneStepBase(Ftduino::I3, Ftduino::I2, Ftduino::BRAKE, Ftduino::RIGHT, true, true);
-    oneStepBase(Ftduino::I1, Ftduino::I2, Ftduino::LEFT, Ftduino::BRAKE, false, true);
+    oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::LEFT, Ftduino::RIGHT, true, true);
+   /* oneStepBase(Ftduino::I3, Ftduino::I2, Ftduino::BRAKE, Ftduino::RIGHT, true, true);
+    oneStepBase(Ftduino::I1, Ftduino::I2, Ftduino::LEFT, Ftduino::BRAKE, false, true);*/
 }
 
 void oneStepRight() {
-    oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::RIGHT, Ftduino::LEFT, true, false);
-    oneStepBase(Ftduino::I3, Ftduino::I2, Ftduino::LEFT, Ftduino::BRAKE, true, true);
-    oneStepBase(Ftduino::I1, Ftduino::I2, Ftduino::BRAKE, Ftduino::RIGHT, true, false);
+    oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::RIGHT, Ftduino::LEFT, true, true);
+    /*oneStepBase(Ftduino::I3, Ftduino::I2, Ftduino::LEFT, Ftduino::BRAKE, true, true);
+    oneStepBase(Ftduino::I1, Ftduino::I2, Ftduino::BRAKE, Ftduino::RIGHT, true, false);*/
 }
 
-void turnLeft() {
-    oneStepBack();
-    oneStepLeft();
-    oneStepLeft();
-}
-
-void turnRight() {
+void turnLeft() 
+{
     oneStepBack();
     oneStepRight();
     oneStepRight();
+}
+
+void turnRight() 
+{
+    oneStepBack();
+    oneStepLeft();
+    oneStepLeft();
 }
 
 bool setMotor(uint8_t port, uint8_t mode)
