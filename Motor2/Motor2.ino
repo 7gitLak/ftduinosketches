@@ -42,6 +42,18 @@ void oneStepRight() {
     oneStepBase(Ftduino::I3, Ftduino::I4, Ftduino::RIGHT, Ftduino::LEFT, true, false);
 }
 
+void turnLeft() {
+    oneStepBack();
+    oneStepLeft();
+    oneStepLeft();
+}
+
+void turnRigth() {
+    oneStepBack();
+    oneStepRight();
+    oneStepRight();
+}
+
 bool setMotor(uint8_t port, uint8_t mode)
 {
     ftduino.motor_set(port, mode);
@@ -82,9 +94,20 @@ void oneStepBase(uint8_t ch1, uint8_t ch2, uint8_t mode1, uint8_t mode2, const b
   digitalWrite ( LED_BUILTIN , LOW ) ;  
 }
 
+void avoidObstacle() 
+{
+   if(ftduino.input_get(Ftduino::I5))
+    {
+        turnLeft();
+    } 
+   if(ftduino.input_get(Ftduino::I6))
+    {
+        turnRight();
+    } 
+}
 
 void loop() { 
-  oneStepForward();
-  delay(500);  
-
+    avoidObstacle();
+    oneStepForward();
+    delay(200);  
 }
